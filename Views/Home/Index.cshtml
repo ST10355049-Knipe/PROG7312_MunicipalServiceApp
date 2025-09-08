@@ -2,7 +2,42 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="jumbotron text-center bg-light p-5 rounded-lg mb-4">
+    <h1 class="display-4">Building a Better Community, Together</h1>
+    <p class="lead">Report local issues, stay updated on events, and track service requests all in one place.</p>
+    <hr class="my-4">
+    <p>Have an issue to report? Let us know, and we'll get on it.</p>
+    <a class="btn btn-primary btn-lg" asp-controller="Home" asp-action="ReportIssue" role="button">Report an Issue Now</a>
+</div>
+
+<div class="row text-center">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Report an Issue</h5>
+                <p class="card-text">Submit a new report for issues like potholes, power outages, or water leaks.</p>
+                <a asp-controller="Home" asp-action="ReportIssue" class="btn btn-outline-primary">Go to Form</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Local Events</h5>
+                <p class="card-text">Discover upcoming community events, meetings, and announcements.</p>
+                <a href="#" class="btn btn-outline-secondary disabled">Coming Soon</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Service Request Status</h5>
+                <p class="card-text">Check the status of your previously submitted service requests.</p>
+                <a href="#" class="btn btn-outline-secondary disabled">Coming Soon</a>
+            </div>
+        </div>
+    </div>
 </div>

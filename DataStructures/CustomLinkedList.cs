@@ -13,7 +13,7 @@
         }
     }
 
-    public class CustomLinkedList
+    public class CustomLinkedList<T>
     {
         private Node<T> head; // Head of the list
 
