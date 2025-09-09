@@ -2,12 +2,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="jumbotron text-center bg-light p-5 rounded-lg mb-4">
-    <h1 class="display-4">Building a Better Community, Together</h1>
-    <p class="lead">Report local issues, stay updated on events, and track service requests all in one place.</p>
-    <hr class="my-4">
-    <p>Have an issue to report? Let us know, and we'll get on it.</p>
-    <a class="btn btn-primary btn-lg" asp-controller="Home" asp-action="ReportIssue" role="button">Report an Issue Now</a>
+<div class="hero-section text-center p-5 rounded-lg mb-4">
+    <div class="container">
+        <h1 class="display-4">Building a Better Community, Together</h1>
+        <p class="lead">Report local issues, stay updated on events, and track service requests all in one place.</p>
+        <hr class="my-4" style="border-color: rgba(255,255,255,0.5);">
+        <p>Have an issue to report? Let us know, and we'll get on it.</p>
+        <a class="btn btn-primary btn-lg" asp-controller="Home" asp-action="ReportIssue" role="button">Report an Issue Now</a>
+    </div>
 </div>
 
 <div class="row text-center">
@@ -40,4 +42,83 @@
             </div>
         </div>
     </div>
+
+    <div class="container mt-5">
+
+        <!-- Section: How It Works -->
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="display-6">How It Works</h2>
+                <p class="lead">A simple, transparent process for every report.</p>
+                <hr>
+            </div>
+        </div>
+        <div class="row text-center">
+            <!-- Step 1 Column -->
+            <div class="col-md-4">
+                <div class="icon-circle mb-3">
+                    <i class="fa-solid fa-file-signature fa-2x"></i>
+                </div>
+                <h3>1. Submit Your Report</h3>
+                <p>Fill out the detailed form, providing the location, category, and a description of the issue. Attach a photo if possible.</p>
+            </div>
+            <!-- Step 2 Column -->
+            <div class="col-md-4">
+                <div class="icon-circle mb-3">
+                    <i class="fa-solid fa-users-viewfinder fa-2x"></i>
+                </div>
+                <h3>2. Community Verification</h3>
+                <p>Nearby residents can view and upvote your report, helping the municipality identify high-priority issues affecting the community.</p>
+            </div>
+            <!-- Step 3 Column -->
+            <div class="col-md-4">
+                <div class="icon-circle mb-3">
+                    <i class="fa-solid fa-list-check fa-2x"></i>
+                </div>
+                <h3>3. Action & Resolution</h3>
+                <p>Once verified, the report is assigned to the relevant department for action. You will be able to track the status of your submission.</p>
+            </div>
+        </div>
+
+        <!-- Section: Key Officials -->
+        <div class="row text-center mt-5 pt-4">
+            <div class="col-12">
+                <h2 class="display-6">Meet Your Municipal Leaders</h2>
+                <p class="lead">The team dedicated to serving the City of Cape Town.</p>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Official 1 Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="~/images/executiveMayor.jpg" class="card-img-top" alt="Photo of the Mayor">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Geordin Hill-Lewis</h5>
+                        <p class="card-text text-muted">Executive Mayor</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Official 2 Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="~/images/deputyExecutiveMayor.jpg" class="card-img-top" alt="Photo of the Deputy Mayor">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Eddie Andrews</h5>
+                        <p class="card-text text-muted">Deputy Executive Mayor</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Official 3 Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="~/images/cityManager.png" class="card-img-top" alt="Photo of the City Manager">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Lungelo Mbandazayo</h5>
+                        <p class="card-text text-muted">City Manager</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
 </div>

@@ -1,0 +1,64 @@
+﻿body::before {
+    content: '';
+    display: block;
+    height: 15px;
+    background: linear-gradient(to right, #DE3831 20%, /* Red */
+    #002395 20%, #002395 40%, /* Blue */
+    #007A4D 40%, #007A4D 60%, /* Green */
+    #FFB612 60%, #FFB612 80%, /* Gold */
+    #000000 80% /* Black */
+    );
+}
+/* Top border for the footer */
+footer {
+    border-top: 15px solid #007A4D;
+}
+
+.hero-section {
+    /* Establishes a positioning context for the ::before overlay. */
+    position: relative;
+    background-image: url('../images/hero-background.jpg');
+    /* Ensures the background image scales to cover the entire element. */
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5); /* Black at 50% opacity */
+        z-index: 1;
+    }
+
+    /* The container's z-index ensures content sits on top of the overlay. */
+    .hero-section .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* A subtle text-shadow further improves the legibility of the hero text. */
+    .hero-section h1, .hero-section p {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+.icon-circle {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    background-color: #f0f0f0; /* A light grey background */
+    border-radius: 50%; /* This makes the div a perfect circle */
+    color: #007bff; /* Primary blue for the icon color */
+    transition: all 0.3s ease-in-out;
+}
+
+    .icon-circle:hover {
+        background-color: #007bff; /* On hover, flip the colors */
+        color: #ffffff;
+    }
