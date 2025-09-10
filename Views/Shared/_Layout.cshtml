@@ -3,20 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PROG7312_MunicipalServiceApp</title>
+    <title>@ViewData["Title"] - MunicipalServicesApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PROG7312_MunicipalServiceApp.styles.css" asp-append-version="true" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-
+    <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Municipal Services</a>
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/cpt-logo.png" alt="City of Cape Town Logo" class="navbar-logo me-2">
+                    Municipal Services
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,27 +25,68 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="ReportIssue">Report Issue</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Local Events</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Service Status</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+
+    <div class="container py-4">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Municipal Services - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class=" text-muted bg-dark">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase text-white">Municipal Services Portal</h5>
+                    <p>
+                        This portal is a direct line to your local government, designed to empower residents of Cape Town
+                        to report issues, stay informed, and help us build a better community together.
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase text-white">Quick Links</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a asp-controller="Home" asp-action="Index" class="footer-link">Home</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Home" asp-action="ReportIssue" class="footer-link">Report an Issue</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="footer-link disabled">Privacy Policy</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase text-white">Contact</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-home me-2"></i> 12 Hertzog Blvd, Cape Town</li>
+                        <li><i class="fas fa-envelope me-2"></i> contact@capetown.gov.za</li>
+                        <li><i class="fas fa-phone me-2"></i> + 021 400 1111</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            &copy; 2025 - MunicipalServicesApp - City of Cape Town
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

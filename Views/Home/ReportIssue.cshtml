@@ -3,58 +3,92 @@
     ViewData["Title"] = "Report an Issue";
 }
 
-<h2>Report a New Community Issue</h2>
-<p>Use this form to report issues like potholes, water leaks, or power outages.</p>
-<hr />
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h2 class="h4 mb-0">Report a New Community Issue</h2>
+    </div>
+    <div class="card-body p-4">
+        <div class="row">
 
-<div class="row">
-    <div class="col-md-8">
+            <div class="col-md-7">
+                <p>Use this form to report issues like potholes, water leaks, or power outages.</p>
 
-        @if (TempData["SuccessMessage"] != null)
-        {
-            <div class="alert alert-success" role="alert">
-                @TempData["SuccessMessage"]
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @TempData["SuccessMessage"]
+                    </div>
+                }
+
+                <form asp-action="ReportIssue" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Location" class="control-label fw-bold"></label>
+                        <input asp-for="Location" class="form-control" placeholder="e.g., Corner of Pentz Dr" />
+                        <span asp-validation-for="Location" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Category" class="control-label fw-bold"></label>
+                        <select asp-for="Category" class="form-control">
+                            <option value="">-- Select a Category --</option>
+                            <option>Potholes</option>
+                            <option>Water Outage</option>
+                            <option>Power Outage</option>
+                            <option>Waste Collection</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Description" class="control-label fw-bold"></label>
+                        <textarea asp-for="Description" class="form-control" rows="5" placeholder="Provide as much detail as possible."></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="control-label fw-bold">Attach Photo/Video (Optional)</label>
+                        <input type="file" name="mediaFile" class="form-control" />
+                    </div>
+                    <div class="form-group mt-4">
+                        <input type="submit" value="Submit Issue" class="btn btn-primary" />
+                        <a asp-action="Index" class="btn btn-outline-secondary">Back to Main Menu</a>
+                    </div>
+                </form>
             </div>
-        }
 
-        <form asp-action="ReportIssue" method="post" enctype="multipart/form-data">
+            <div class="col-md-5">
+                <div class="p-3 bg-light rounded">
+                    <img src="~/images/report-guidance.jpg" class="img-fluid rounded mb-3" alt="A person pointing to a map, planning a report.">
+                    <h5 class="mb-3">Tips for an Effective Report</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fa-solid fa-check text-success me-2"></i>
+                            <strong>Be Specific:</strong> Provide exact locations or nearby landmarks.
+                        </li>
+                        <li class="mb-2">
+                            <i class="fa-solid fa-check text-success me-2"></i>
+                            <strong>Provide a Clear Photo:</strong> A good photo helps our teams assess the issue quickly.
+                        </li>
+                        <li class="mb-2">
+                            <i class="fa-solid fa-check text-success me-2"></i>
+                            <strong>One Issue Per Report:</strong> Please submit a separate form for each individual issue.
+                        </li>
+                    </ul>
+                </div>
+            </div> <div class="p-3 mt-4 rounded" id="engagement-strategy-box">
+                <h5 class="mb-3">Your Impact as a Citizen Reporter</h5>
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-group mb-3">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" placeholder="e.g., Corner of Main & Long St" />
-                <span asp-validation-for="Location" class="text-danger"></span>
+                <p>
+                    <i class="fa-solid fa-arrow-right-long text-primary me-2"></i>
+                    <strong>What Happens Next:</strong> Once submitted, your report enters a community verification phase before being assigned to a municipal team for action.
+                </p>
+                <p class="mb-0">
+                    <i class="fa-solid fa-award text-primary me-2"></i>
+                    <strong>Earn Badges:</strong> Every valid report that leads to a resolution helps you earn recognition. Accumulate successful reports to become a "Trusted Contributor" in your community!
+                </p>
             </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="Category" class="control-label"></label>
-                <select asp-for="Category" class="form-control">
-                    <option value="">-- Select a Category --</option>
-                    <option>Potholes</option>
-                    <option>Water Outage</option>
-                    <option>Power Outage</option>
-                    <option>Waste Collection</option>
-                    <option>Other</option>
-                </select>
+        </div>
             </div>
-
-            <div class="form-group mb-3">
-                <label asp-for="Description" class="control-label"></label>
-                <textarea asp-for="Description" class="form-control" rows="5" placeholder="Provide as much detail as possible."></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="control-label">Attach Photo/Video (Optional)</label>
-                <input type="file" name="mediaFile" class="form-control" />
-            </div>
-
-            <div class="form-group mt-4">
-                <input type="submit" value="Submit Issue" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-outline-secondary">Back to Main Menu</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 

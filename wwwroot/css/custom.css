@@ -1,24 +1,22 @@
-﻿body::before {
-    content: '';
-    display: block;
-    height: 15px;
-    background: linear-gradient(to right, #DE3831 20%, /* Red */
-    #002395 20%, #002395 40%, /* Blue */
-    #007A4D 40%, #007A4D 60%, /* Green */
-    #FFB612 60%, #FFB612 80%, /* Gold */
-    #000000 80% /* Black */
-    );
+﻿body {
+   
 }
-/* Top border for the footer */
+
+    body::before {
+        content: '';
+        display: block;
+        height: 15px;
+        background: linear-gradient(to right, #DE3831 20%, #002395 20%, #002395 40%, #007A4D 40%, #007A4D 60%, #FFB612 60%, #FFB612 80%, #000000 80% );
+    }
+
 footer {
     border-top: 15px solid #007A4D;
+    color: #adb5bd;
 }
 
 .hero-section {
-    /* Establishes a positioning context for the ::before overlay. */
     position: relative;
     background-image: url('../images/hero-background.jpg');
-    /* Ensures the background image scales to cover the entire element. */
     background-size: cover;
     background-position: center;
     color: white;
@@ -31,17 +29,15 @@ footer {
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5); /* Black at 50% opacity */
+        background-color: rgba(0, 0, 0, 0.5);
         z-index: 1;
     }
 
-    /* The container's z-index ensures content sits on top of the overlay. */
     .hero-section .container {
         position: relative;
         z-index: 2;
     }
 
-    /* A subtle text-shadow further improves the legibility of the hero text. */
     .hero-section h1, .hero-section p {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
@@ -52,13 +48,79 @@ footer {
     align-items: center;
     width: 80px;
     height: 80px;
-    background-color: #f0f0f0; /* A light grey background */
-    border-radius: 50%; /* This makes the div a perfect circle */
-    color: #007bff; /* Primary blue for the icon color */
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    color: var(--bs-primary);
     transition: all 0.3s ease-in-out;
 }
 
     .icon-circle:hover {
-        background-color: #007bff; /* On hover, flip the colors */
+        background-color: var(--bs-primary);
         color: #ffffff;
+    }
+
+@media (max-width: 767px) {
+    .guidance-column {
+        margin-top: 2rem;
+    }
+}
+
+#engagement-strategy-box {
+    background-color: #f8f9fa;
+    border-left: 4px solid var(--bs-primary);
+}
+
+.navbar-logo {
+    height: 30px;
+}
+
+.footer-link {
+    color: #adb5bd;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+    .footer-link:hover {
+        color: #ffffff;
+    }
+
+    .footer-link.disabled {
+        color: #6c757d;
+        pointer-events: none;
+    }
+
+:root {
+    --bs-primary: #007A4D;
+    --bs-primary-rgb: 0, 122, 77;
+    --custom-green-darker: #005c3a;
+}
+
+.btn-primary {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+    color: #fff !important; /* Ensures text is white */
+}
+
+.btn-primary:hover, .btn-primary:active {
+    background-color: var(--custom-green-darker) !important;
+    border-color: var(--custom-green-darker) !important;
+}
+
+.bg-primary {
+    background-color: var(--bs-primary) !important;
+}
+
+a {
+    color: var(--bs-primary);
+}
+
+.btn-outline-primary {
+    color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+}
+
+    .btn-outline-primary:hover {
+        color: #fff !important;
+        background-color: var(--bs-primary) !important;
+        border-color: var(--bs-primary) !important;
     }
