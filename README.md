@@ -2,6 +2,8 @@
 
 This repository contains Part 1 of my final year project for the PROG7312 module. The goal is to develop a proof-of-concept ASP.NET Core MVC application designed to streamline municipal service reporting within a South African context. This first part establishes the core application structure and implements the "Report an Issue" feature.
 
+Youtube Video Link: https://youtu.be/smOUiMm-yqU
+
 ## Key Features Implemented (Part 1)
 
 * **Professional User Interface:** A modern, responsive, multi-section landing page and a well-structured form page, designed with inspiration from official government websites.
