@@ -2,6 +2,8 @@
    
 }
 
+    /* Using the ::before pseudo-element on the body to create the multi-coloured bar at the very top. */
+    /* It's a neat trick using a linear gradient to mimic the colours of the South African flag. I got this idea from the official Goverment Website */
     body::before {
         content: '';
         display: block;
@@ -10,10 +12,12 @@
     }
 
 footer {
+    /* Adding a thick top border to the footer that matches my main theme colour. */
     border-top: 15px solid #007A4D;
     color: #adb5bd;
 }
 
+/* The hero section uses a background image. */
 .hero-section {
     position: relative;
     background-image: url('../images/hero-background.jpg');
@@ -22,6 +26,8 @@ footer {
     color: white;
 }
 
+    /* This ::before pseudo-element adds a dark overlay on top of the hero image. */
+    /* This makes the white text on top much easier to read. */
     .hero-section::before {
         content: '';
         position: absolute;
@@ -30,14 +36,16 @@ footer {
         right: 0;
         bottom: 0;
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
+        z-index: 1; /* Sits below the text but above the image */
     }
 
+    /* Making sure the actual content of the hero section is on top of the overlay. */
     .hero-section .container {
         position: relative;
         z-index: 2;
     }
 
+    /* Adding a subtle text shadow to make the hero text pop even more. */
     .hero-section h1, .hero-section p {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
@@ -59,6 +67,7 @@ footer {
         color: #ffffff;
     }
 
+/* A simple media query to stack the 'guidance' column nicely on mobile screens. */
 @media (max-width: 767px) {
     .guidance-column {
         margin-top: 2rem;
@@ -89,12 +98,16 @@ footer {
         pointer-events: none;
     }
 
+/* Defining my main theme colours as CSS variables. */
+/* This makes it super easy to change the site's colour scheme later. */
 :root {
     --bs-primary: #007A4D;
     --bs-primary-rgb: 0, 122, 77;
     --custom-green-darker: #005c3a;
 }
 
+/* Overriding Bootstrap's default styles to use my custom green theme colour for primary buttons. */
+/* The !important tag is sometimes needed to make sure my style overrides over Bootstrap's. */
 .btn-primary {
     background-color: var(--bs-primary) !important;
     border-color: var(--bs-primary) !important;
