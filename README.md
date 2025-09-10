@@ -55,15 +55,21 @@ The application is built using the Model-View-Controller (MVC) architectural pat
 4.  You can optionally attach a photo or video using the "Choose File" button.
 5.  Click **"Submit Issue"**. A success message will appear at the top of the page, and the user engagement strategy is explained in the "Your Impact" section on the right.
 
-## References & Resources
+## References
 
-* **[C# Programming Guide](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/)**: The official Microsoft documentation for the C# language, used as the primary source for language syntax and features.
-* **[Introduction to ASP.NET Core MVC](https://learn.microsoft.com/en-us/aspnet/core/mvc/overview)**: The official guide for the ASP.NET Core MVC framework, explaining the architecture used in this project.
-* **[Linked List Implementation in C#](https://www.geeksforgeeks.org/c-sharp/linked-list-implementation-in-c-sharp/)**: A tutorial explaining the theory and implementation of linked lists, directly relevant to the custom data structure built for this project.
-* **[Generics in C#](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics)**: Official documentation explaining the concept of generics, which were used to create the reusable `CustomLinkedList<T>`.
-* **[Bootstrap 5 Documentation](https://getbootstrap.com/docs/5.3/getting-started/introduction/)**: The official documentation for the Bootstrap framework, used for all frontend components, styling, and the responsive grid system.
-* **[A Complete Guide to CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)**: An industry-standard guide to the CSS Grid layout model, which was used to provide a robust page structure and fix the sticky footer issue.
-* **[Font Awesome](https://fontawesome.com/)**: The icon library used to add professional iconography to the user interface.
+Coyier, C., 2024. [*A Complete Guide to Grid*](https://css-tricks.com/snippets/css/complete-guide-grid/). [online] CSS-Tricks. Available at: <https://css-tricks.com/snippets/css/complete-guide-grid/> [Accessed 09 September 2025].
+
+Fonticons, Inc., 2025. [*Font Awesome*](https://fontawesome.com/). [online] Available at: <https://fontawesome.com/> [Accessed 09 September 2025].
+
+GeeksforGeeks, 2024. [*Linked List Implementation in C#*](https://www.geeksforforgeeks.org/c-sharp/linked-list-implementation-in-c-sharp/). [online] Available at: <https://www.geeksforforgeeks.org/c-sharp/linked-list-implementation-in-c-sharp/> [Accessed 08 September 2025].
+
+Microsoft, 2025. [*C# Programming Guide*](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/). [online] Microsoft Learn. Available at: <https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/> [Accessed 08 September 2025].
+
+Microsoft, 2025. [*Generics in C#*](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics). [online] Microsoft Learn. Available at: <https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics> [Accessed 08 September 2025].
+
+Microsoft, 2025. [*Introduction to ASP.NET Core MVC*](https://learn.microsoft.com/en-us/aspnet/core/mvc/overview). [online] Microsoft Learn. Available at: <https://learn.microsoft.com/en-us/aspnet/core/mvc/overview> [Accessed 08 September 2025].
+
+The Bootstrap Team, 2025. [*Introduction · Bootstrap v5.3*](https://getbootstrap.com/docs/5.3/getting-started/introduction/). [online] Available at: <https://getbootstrap.com/docs/5.3/getting-started/introduction/> [Accessed 10 September 2025].
 
 ## Author
 
