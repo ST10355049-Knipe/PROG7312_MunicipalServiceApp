@@ -2,15 +2,15 @@
 
 namespace PROG7312_MunicipalServiceApp.DataStructures
 {
-    // My Event model needs a way to be compared, so I'm using this interface.
-    // It tells the Priority Queue how to handle the Event objects.
+    // Defines a contract for objects that can be used in the priority queue.
+    // This ensures any object stored has a 'Priority' property.
     public interface IPrioritizable
     {
         int Priority { get; }
     }
 
-    // I've made my Priority Queue generic, but it can only work with types
-    // that have a 'Priority' property, which is enforced by the IPrioritizable constraint.
+    // A generic priority queue, constrained to types that implement IPrioritizable.
+    // Lower priority numbers are considered higher priority.
     public class CustomPriorityQueue<T> where T : IPrioritizable
     {
         private readonly CustomLinkedList<T> items;
@@ -20,35 +20,47 @@ namespace PROG7312_MunicipalServiceApp.DataStructures
             items = new CustomLinkedList<T>();
         }
 
-        // The Enqueue method adds an item to the queue based on its priority level.
+        // Inserts an item into the queue, maintaining sorted order by priority.
         public void Enqueue(T item)
         {
-            // Case 1: If the queue is empty, the new item becomes the first one.
+            // Handle case for an empty queue.
             if (items.head == null)
             {
                 items.AddFirst(item);
                 return;
             }
 
-            // Case 2: If the new item has a higher priority (a lower number)
-            // than the head, it becomes the new head.
+            // Handle case where the new item has the highest priority (lowest value).
             if (item.Priority < items.head.Data.Priority)
             {
                 items.AddFirst(item);
                 return;
             }
 
-            // Case 3: Find the correct spot to insert the new item.
-            // I need to look for the first item in the list that has a
-            // lower or equal priority than my new item.
+            // Find the correct insertion point in the list.
             var current = items.head;
             while (current.Next != null && current.Next.Data.Priority <= item.Priority)
             {
                 current = current.Next;
             }
 
-            // Once I find the right spot, I insert the new item.
+            // Insert the new item after the found node.
             items.InsertAfter(current, item);
+        }
+
+        // This method gets the top N highest-priority items without removing them.
+        public List<T> PeekTop(int count)
+        {
+            var topItems = new List<T>();
+            var current = items.head;
+            int i = 0;
+            while (current != null && i < count)
+            {
+                topItems.Add(current.Data);
+                current = current.Next;
+                i++;
+            }
+            return topItems;
         }
     }
 }

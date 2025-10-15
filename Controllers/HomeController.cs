@@ -52,7 +52,7 @@ namespace PROG7312_MunicipalServiceApp.Controllers
             // Add the new issue report to my custom linked list data structure.
             GlobalData.IssueReports.Add(issue);
 
-            // Using TempData to show a success message on the next page load. It's a one-time message.
+            // Using TempData to show a success message on the next page load. Its a one time message.
             TempData["SuccessMessage"] = "Thank you, Citizen Reporter! Your issue has been submitted successfully. Keep contributing to earn badges!";
 
             // Redirect back to the ReportIssue page to show a clean form and prevent resubmission on refresh.
@@ -62,68 +62,92 @@ namespace PROG7312_MunicipalServiceApp.Controllers
         [HttpGet]
         public IActionResult LocalEvents(string searchQuery, string category, string sortBy = "date_desc")
         {
-            var allEvents = GlobalData.EventsByDate.GetAllValues();
-            ViewData["CurrentSearch"] = searchQuery;
+            // Use the Priority Queue to get the top 4 events for the featured carousel.
+            var featuredEvents = GlobalData.FeaturedEvents.PeekTop(4);
 
+            // Start with the full list of events from the main dictionary.
+            var allEvents = GlobalData.EventsByDate.GetAllValues();
+            ViewData["CurrentSearch"] = searchQuery; // Keeps the search input populated after search.
+
+            // Apply filters if the user provided any input.
             if (!String.IsNullOrEmpty(category))
             {
                 GlobalData.UserSearchHistory.Add(category);
                 allEvents = allEvents.Where(e => e.Category == category).ToList();
             }
-
             if (!String.IsNullOrEmpty(searchQuery))
             {
                 allEvents = allEvents.Where(e => e.Title.ToLower().Contains(searchQuery.ToLower())).ToList();
             }
 
-            // This switch statement applies the correct sorting based on the user's selection.
+            // Apply the selected sort order. Default is newest date first.
             switch (sortBy)
             {
-                case "date_asc":
-                    allEvents = allEvents.OrderBy(e => e.Date).ToList();
-                    break;
-                case "title_asc":
-                    allEvents = allEvents.OrderBy(e => e.Title).ToList();
-                    break;
-                case "title_desc":
-                    allEvents = allEvents.OrderByDescending(e => e.Title).ToList();
-                    break;
-                default: // Default case is "date_desc"
-                    allEvents = allEvents.OrderByDescending(e => e.Date).ToList();
-                    break;
+                case "date_asc": allEvents = allEvents.OrderBy(e => e.Date).ToList(); break;
+                case "title_asc": allEvents = allEvents.OrderBy(e => e.Title).ToList(); break;
+                case "title_desc": allEvents = allEvents.OrderByDescending(e => e.Title).ToList(); break;
+                default: allEvents = allEvents.OrderByDescending(e => e.Date).ToList(); break;
             }
 
+            // --- Recommendation Algorithm ---
             var recommendedEvents = new List<Event>();
+            string favoriteCategory = null;
+            int searchCount = 0;
             var searchHistory = GlobalData.UserSearchHistory.GetAllNodesAsList();
 
             if (searchHistory.Any())
             {
-                var favoriteCategory = searchHistory
-                    .GroupBy(c => c)
-                    .OrderByDescending(group => group.Count())
-                    .Select(group => group.Key)
-                    .FirstOrDefault();
-
-                if (favoriteCategory != null)
+                // Find the user's most searched category using LINQ.
+                var favoriteGroup = searchHistory.GroupBy(c => c).OrderByDescending(g => g.Count()).FirstOrDefault();
+                if (favoriteGroup != null)
                 {
+                    favoriteCategory = favoriteGroup.Key;
+                    searchCount = favoriteGroup.Count();
+
+                    // Get up to 3 events from that category that aren't already displayed.
                     recommendedEvents = GlobalData.EventsByDate.GetAllValues()
                         .Where(e => e.Category == favoriteCategory && !allEvents.Contains(e))
-                        .Take(3)
-                        .ToList();
+                        .Take(3).ToList();
                 }
             }
 
+            // Package all the necessary data into the ViewModel for the page.
             var viewModel = new LocalEventsViewModel
             {
+                FeaturedEvents = featuredEvents,
                 DisplayEvents = allEvents,
-                RecommendedEvents = recommendedEvents
+                RecommendedEvents = recommendedEvents,
+                FavoriteCategory = favoriteCategory,
+                SearchCount = searchCount
             };
 
+            // Prepare ViewBag data for the filter and sort dropdowns.
             var categories = GlobalData.UniqueEventCategories.GetAllItems();
             ViewBag.Categories = new SelectList(categories);
-            ViewBag.SortBy = sortBy; // Pass sort selection back to the view
+            var sortOptions = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "date_desc", Text = "Date (Newest)" },
+                new SelectListItem { Value = "date_asc", Text = "Date (Oldest)" },
+                new SelectListItem { Value = "title_asc", Text = "Title (A-Z)" },
+                new SelectListItem { Value = "title_desc", Text = "Title (Z-A)" }
+            };
+            ViewBag.SortByList = new SelectList(sortOptions, "Value", "Text", sortBy);
 
             return View(viewModel);
+        }
+
+        // This is a special endpoint for my JavaScript to call.
+        // It finds a single event by its ID and returns the data in JSON format,
+        // which is perfect for dynamically loading content into the modal.
+        [HttpGet]
+        public IActionResult GetEventById(int id)
+        {
+            var eventData = GlobalData.EventsByDate.GetAllValues().FirstOrDefault(e => e.Id == id);
+            if (eventData == null)
+            {
+                return NotFound();
+            }
+            return Json(eventData);
         }
 
 

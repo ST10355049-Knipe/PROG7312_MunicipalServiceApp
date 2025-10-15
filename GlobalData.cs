@@ -1,26 +1,24 @@
 ﻿using PROG7312_MunicipalServiceApp.DataStructures;
 using PROG7312_MunicipalServiceApp.Models;
 
-
 namespace PROG7312_MunicipalServiceApp
 {
-    public class GlobalData
+    // Acts as a centralized in-memory data store for the application's lifecycle.
+    public static class GlobalData
     {
-        // I've created a static property here to act as a simple in-memory 'database'. 
-        // All issue reports will be stored in this single linked list for the lifetime of the application.
+        // Stores all user-submitted issue reports from Part 1.
         public static CustomLinkedList<IssueReport> IssueReports { get; } = new CustomLinkedList<IssueReport>();
 
-        // A Sorted Dictionary will be our primary data store for events.
-        // It's required by the rubric and is efficient for organizing events by date.
+        // Primary storage for events, automatically sorted by date (the key).
         public static CustomSortedDictionary<DateTime, Event> EventsByDate { get; } = new CustomSortedDictionary<DateTime, Event>();
 
-        // A Set is required to efficiently store and retrieve unique event categories for our search filter.
+        // Stores unique event categories for populating search filters efficiently.
         public static CustomSet<string> UniqueEventCategories { get; } = new CustomSet<string>();
 
-        // A Priority Queue is required and is a great way to manage and display important events first.
+        // Manages high-priority or featured events.
         public static CustomPriorityQueue<Event> FeaturedEvents { get; } = new CustomPriorityQueue<Event>();
 
-        // This new list will store the history of all category searches made by the user.
+        // Tracks user search history to power the recommendation engine.
         public static CustomLinkedList<string> UserSearchHistory { get; } = new CustomLinkedList<string>();
     }
 }

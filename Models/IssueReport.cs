@@ -6,7 +6,7 @@ namespace PROG7312_MunicipalServiceApp.Models
     // This is my model for an issue report. It defines the structure of the data.
     public class IssueReport
     {
-        // Adding some basic server-side validation here. The form won't be valid if these are empty.
+        // Adding some basic server-side validation here. The form wont be valid if these are empty.
         [Required(ErrorMessage = "Please provide the location of the issue.")]
         public string Location { get; set; }
 

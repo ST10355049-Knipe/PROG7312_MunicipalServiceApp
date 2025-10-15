@@ -10,7 +10,7 @@
         public Node(T data)
         {
             this.Data = data;
-            this.Next = null; // When a new node is created, it doesn't point to anything yet.
+            this.Next = null; // When a new node is created, it doesnt point to anything yet.
         }
     }
 
@@ -46,14 +46,14 @@
                 // Use .Equals() to correctly compare the data.
                 if (current.Data.Equals(item))
                 {
-                    return true; // We found the item.
+                    return true; //If we found the item
                 }
                 current = current.Next;
             }
-            return false; // We reached the end of the list without finding it.
+            return false; // We reached the end of the list without finding the item.
         }
 
-        // This method adds a new item to the very beginning of the list.
+        // Method that adds a new item to the very beginning of the list.
         public void AddFirst(T data)
         {
             Node<T> newNode = new Node<T>(data);
@@ -66,7 +66,7 @@
         {
             if (previousNode == null)
             {
-                // Cannot insert after a non-existent node.
+                // Cannot insert after a non existent node.
                 return;
             }
             Node<T> newNode = new Node<T>(data);

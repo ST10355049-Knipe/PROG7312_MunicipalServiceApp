@@ -2,7 +2,7 @@
 {
     public class CustomSet<T>
     {
-        // My set uses my custom linked list on the inside to store the items.
+        // My set uses my custom linked list to store the items.
         private readonly CustomLinkedList<T> items;
 
         public CustomSet()
@@ -10,7 +10,7 @@
             items = new CustomLinkedList<T>();
         }
 
-        // The Add method is what makes this a set - it stops any duplicates.
+        // Add method makes it a set as there is no duplicates.
         public bool Add(T item)
         {
             //I check if the item is already in the list.

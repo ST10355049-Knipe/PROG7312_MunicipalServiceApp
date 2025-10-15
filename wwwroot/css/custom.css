@@ -148,3 +148,45 @@ a {
         transform: translateY(-5px);
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
     }
+
+.featured-event-card {
+    transition: all 0.2s ease-in-out;
+}
+
+    .featured-event-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+.featured-event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This ensures the image fills the square without stretching */
+    min-height: 150px;
+}
+
+#recommendation-section {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#recommendation-section .alert {
+    background-color: #e6f2ed;
+    border-color: var(--bs-primary);
+    color: #004d30; 
+}
+
+    #recommendation-section .alert strong {
+        color: var(--bs-primary);
+    }
