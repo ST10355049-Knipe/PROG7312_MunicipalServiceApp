@@ -54,9 +54,11 @@ Part 2 expands the application's functionality by introducing a dynamic "Local E
     * **`CustomSet<T>`:** Used to efficiently manage the unique list of event categories for the filter dropdown.
     * **`CustomPriorityQueue<T>`:** Used to manage and prioritize "featured" or important events.
 
-<img width="2542" height="1290" alt="localevents announcements" src="https://github.com/user-attachments/assets/dbe10342-b69a-462a-8712-eb7f6b2d07c1" />
+<img width="2522" height="829" alt="localeventsfinal" src="https://github.com/user-attachments/assets/07c7f1ae-3a9d-42f5-9a53-1fb586ef8862" />
 
-<img width="2530" height="1070" alt="recommendedforyoupic" src="https://github.com/user-attachments/assets/f194ff78-c7b0-47b9-91f0-61807d9b27b8" />
+
+<img width="1705" height="1251" alt="localeventsfinal2" src="https://github.com/user-attachments/assets/ebd80030-ba11-4c70-9375-32ddb877d906" />
+
 
 
 ---
@@ -165,7 +167,7 @@ C# Corner, 2023. Learn About Priority Queue In C# With Examples. [online] Availa
 
 GeeksforGeeks, 2024. C# | SortedDictionary Class. [online] Available at: https://www.geeksforgeeks.org/c-sharp/sorteddictionary-class-in-c-sharp/ [Accessed 14 October 2025].
 
-Google, 2025. Gemini Language Model Consultation. [online] Mountain View, CA: Google. Assistance provided in debugging CSS layout conflicts and refining code comments. [Accessed 15 October 2025].
+Google, 2025. Gemini Language Model Consultation. [online] Mountain View, CA: Google. The model was used as a tool to generate boilerplate JavaScript code for implementing a Bootstrap modal with a Fetch API call, based on prompts describing the desired functionality (e.g., "on modal open, fetch data from a controller endpoint and populate the modal's HTML"). Assistance was also provided in debugging CSS layout conflicts. [Accessed 15 October 2025].
 
 Microsoft, 2025. Add a model to an ASP.NET Core MVC app. [online] Microsoft Learn. Available at: https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-9.0&tabs=visual-studio [Accessed 15 October 2025].
 
@@ -176,6 +178,12 @@ Microsoft, 2025. Introduction to LINQ Queries (C#). [online] Microsoft Learn. Av
 Microsoft, 2025. Model validation in ASP.NET Core MVC. [online] Microsoft Learn. Available at: https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-9.0 [Accessed 15 October 2025].
 
 TutorialsPoint, 2025. Sets in C#. [online] Available at: https://www.tutorialspoint.com/sets-in-chash [Accessed 15 October 2025].
+
+MDN Web Docs, 2025. DOMContentLoaded event. [online] Mozilla. Available at: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event [Accessed 15 October 2025].
+
+MDN Web Docs, 2025. Using the Fetch API. [online] Mozilla. Available at: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch [Accessed 15 October 2025].
+
+The Bootstrap Team, 2025. Modal - Bootstrap v5.3. [online] Available at: https://getbootstrap.com/docs/5.3/components/modal/ [Accessed 15 October 2025].
 
 ## Author
 
