@@ -12,7 +12,6 @@ namespace PROG7312_MunicipalServiceApp.Models
         public string Location { get; set; }
         public string ImageUrl { get; set; }
 
-        // This property will be used for our Priority Queue later.
         // A lower number means higher priority (e.g. 1 is a featured event).
         public int Priority { get; set; }
     }

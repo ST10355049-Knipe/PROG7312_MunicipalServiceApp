@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Local Events</h5>
                     <p class="card-text">Discover upcoming community events, meetings, and announcements.</p>
-                    <a href="#" class="btn btn-outline-secondary disabled">Coming Soon</a>
+                    <a asp-controller="Home" asp-action="LocalEvents" class="btn btn-outline-primary">View Events</a>
                 </div>
             </div>
         </div>
@@ -75,6 +75,33 @@
             <p>Once verified, the report is assigned to the relevant department for action. You will be able to track the status of your submission.</p>
         </div>
     </div>
+
+    <div class="row align-items-center my-5 pt-4 bg-light rounded p-4">
+        <div class="col-lg-6">
+            <img src="~/images/events-showcase.jpg" class="img-fluid rounded shadow-sm" alt="A community event in Cape Town.">
+        </div>
+        <div class="col-lg-6">
+            <h2 class="display-6">Stay Connected with Local Events</h2>
+            <p class="lead text-muted">Our portal is your hub for all community gatherings, official announcements, and cultural festivals happening in the city.</p>
+            <hr>
+            <ul class="list-unstyled">
+                <li class="mb-2">
+                    <i class="fa-solid fa-search text-primary me-2"></i>
+                    <strong>Powerful Search:</strong> Quickly find events by title or filter by specific categories.
+                </li>
+                <li class="mb-2">
+                    <i class="fa-solid fa-sort text-primary me-2"></i>
+                    <strong>Flexible Sorting:</strong> Organise events by date or name to find what you're looking for.
+                </li>
+                <li class="mb-2">
+                    <i class="fa-solid fa-star text-primary me-2"></i>
+                    <strong>Smart Recommendations:</strong> Our system learns your interests and suggests other events you might enjoy.
+                </li>
+            </ul>
+            <a asp-controller="Home" asp-action="LocalEvents" class="btn btn-primary mt-3">Explore All Events</a>
+        </div>
+    </div>
+
     <div class="row text-center mt-5 pt-4">
         <div class="col-12">
             <h2 class="display-6">Meet Your Municipal Leaders</h2>

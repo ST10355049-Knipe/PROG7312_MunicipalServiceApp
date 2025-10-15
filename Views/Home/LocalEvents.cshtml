@@ -50,12 +50,20 @@
             <div class="card">
                 <div class="card-body">
                     <form asp-action="LocalEvents" method="get" class="row g-3 align-items-center">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <input type="text" name="searchQuery" class="form-control" placeholder="Search by event title..." value="@ViewData["CurrentSearch"]">
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <select name="category" class="form-select" asp-items="@ViewBag.Categories">
                                 <option value="">All Categories</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select name="sortBy" class="form-select">
+                                <option value="date_desc">Date (Newest)</option>
+                                <option value="date_asc">Date (Oldest)</option>
+                                <option value="title_asc">Title (A-Z)</option>
+                                <option value="title_desc">Title (Z-A)</option>
                             </select>
                         </div>
                         <div class="col-md-2">

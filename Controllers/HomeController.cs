@@ -60,9 +60,8 @@ namespace PROG7312_MunicipalServiceApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult LocalEvents(string searchQuery, string category)
+        public IActionResult LocalEvents(string searchQuery, string category, string sortBy = "date_desc")
         {
-           
             var allEvents = GlobalData.EventsByDate.GetAllValues();
             ViewData["CurrentSearch"] = searchQuery;
 
@@ -77,12 +76,28 @@ namespace PROG7312_MunicipalServiceApp.Controllers
                 allEvents = allEvents.Where(e => e.Title.ToLower().Contains(searchQuery.ToLower())).ToList();
             }
 
+            // This switch statement applies the correct sorting based on the user's selection.
+            switch (sortBy)
+            {
+                case "date_asc":
+                    allEvents = allEvents.OrderBy(e => e.Date).ToList();
+                    break;
+                case "title_asc":
+                    allEvents = allEvents.OrderBy(e => e.Title).ToList();
+                    break;
+                case "title_desc":
+                    allEvents = allEvents.OrderByDescending(e => e.Title).ToList();
+                    break;
+                default: // Default case is "date_desc"
+                    allEvents = allEvents.OrderByDescending(e => e.Date).ToList();
+                    break;
+            }
+
             var recommendedEvents = new List<Event>();
             var searchHistory = GlobalData.UserSearchHistory.GetAllNodesAsList();
 
             if (searchHistory.Any())
             {
-                // This logic finds the most frequently searched category.
                 var favoriteCategory = searchHistory
                     .GroupBy(c => c)
                     .OrderByDescending(group => group.Count())
@@ -91,7 +106,6 @@ namespace PROG7312_MunicipalServiceApp.Controllers
 
                 if (favoriteCategory != null)
                 {
-                    // Get up to 3 events from that category that aren't already being displayed.
                     recommendedEvents = GlobalData.EventsByDate.GetAllValues()
                         .Where(e => e.Category == favoriteCategory && !allEvents.Contains(e))
                         .Take(3)
@@ -99,8 +113,6 @@ namespace PROG7312_MunicipalServiceApp.Controllers
                 }
             }
 
-            // This is the correct place for this code.
-            // I'm packaging everything into the ViewModel to send to the page.
             var viewModel = new LocalEventsViewModel
             {
                 DisplayEvents = allEvents,
@@ -109,8 +121,8 @@ namespace PROG7312_MunicipalServiceApp.Controllers
 
             var categories = GlobalData.UniqueEventCategories.GetAllItems();
             ViewBag.Categories = new SelectList(categories);
+            ViewBag.SortBy = sortBy; // Pass sort selection back to the view
 
-            // The final step is to return the fully prepared ViewModel.
             return View(viewModel);
         }
 
