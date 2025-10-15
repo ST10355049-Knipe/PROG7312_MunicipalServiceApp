@@ -30,5 +30,10 @@
         {
             return items.Contains(item);
         }
+
+        public List<T> GetAllItems()
+        {
+            return items.GetAllNodesAsList();
+        }
     }
 }

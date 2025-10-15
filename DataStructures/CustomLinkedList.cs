@@ -16,7 +16,7 @@
 
     public class CustomLinkedList<T>
     {
-        private Node<T> head;
+        public Node<T> head;
 
         // This method adds a new item to the end of the list.
         public void Add(T data)
@@ -51,6 +51,39 @@
                 current = current.Next;
             }
             return false; // We reached the end of the list without finding it.
+        }
+
+        // This method adds a new item to the very beginning of the list.
+        public void AddFirst(T data)
+        {
+            Node<T> newNode = new Node<T>(data);
+            newNode.Next = head;
+            head = newNode;
+        }
+
+        // This method inserts a new item after a specific node in the list.
+        public void InsertAfter(Node<T> previousNode, T data)
+        {
+            if (previousNode == null)
+            {
+                // Cannot insert after a non-existent node.
+                return;
+            }
+            Node<T> newNode = new Node<T>(data);
+            newNode.Next = previousNode.Next;
+            previousNode.Next = newNode;
+        }
+
+        public List<T> GetAllNodesAsList()
+        {
+            var list = new List<T>();
+            var current = head;
+            while (current != null)
+            {
+                list.Add(current.Data);
+                current = current.Next;
+            }
+            return list;
         }
     }
 }

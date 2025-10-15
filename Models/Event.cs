@@ -1,6 +1,8 @@
-﻿namespace PROG7312_MunicipalServiceApp.Models
+﻿using PROG7312_MunicipalServiceApp.DataStructures;
+
+namespace PROG7312_MunicipalServiceApp.Models
 {
-    public class Event
+    public class Event : IPrioritizable
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -11,7 +13,7 @@
         public string ImageUrl { get; set; }
 
         // This property will be used for our Priority Queue later.
-        // A lower number means higher priority (e.g., 1 is a featured event).
+        // A lower number means higher priority (e.g. 1 is a featured event).
         public int Priority { get; set; }
     }
 }

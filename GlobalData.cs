@@ -17,7 +17,10 @@ namespace PROG7312_MunicipalServiceApp
         // A Set is required to efficiently store and retrieve unique event categories for our search filter.
         public static CustomSet<string> UniqueEventCategories { get; } = new CustomSet<string>();
 
-        // A Priority Queue is required and is a great way to manage and display "featured" or important events first.
+        // A Priority Queue is required and is a great way to manage and display important events first.
         public static CustomPriorityQueue<Event> FeaturedEvents { get; } = new CustomPriorityQueue<Event>();
+
+        // This new list will store the history of all category searches made by the user.
+        public static CustomLinkedList<string> UserSearchHistory { get; } = new CustomLinkedList<string>();
     }
 }

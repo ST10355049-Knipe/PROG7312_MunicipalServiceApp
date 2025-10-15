@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PROG7312_MunicipalServiceApp.Models;
 using System.Diagnostics;
 
@@ -57,6 +58,62 @@ namespace PROG7312_MunicipalServiceApp.Controllers
             // Redirect back to the ReportIssue page to show a clean form and prevent resubmission on refresh.
             return RedirectToAction("ReportIssue");
         }
+
+        [HttpGet]
+        public IActionResult LocalEvents(string searchQuery, string category)
+        {
+           
+            var allEvents = GlobalData.EventsByDate.GetAllValues();
+            ViewData["CurrentSearch"] = searchQuery;
+
+            if (!String.IsNullOrEmpty(category))
+            {
+                GlobalData.UserSearchHistory.Add(category);
+                allEvents = allEvents.Where(e => e.Category == category).ToList();
+            }
+
+            if (!String.IsNullOrEmpty(searchQuery))
+            {
+                allEvents = allEvents.Where(e => e.Title.ToLower().Contains(searchQuery.ToLower())).ToList();
+            }
+
+            var recommendedEvents = new List<Event>();
+            var searchHistory = GlobalData.UserSearchHistory.GetAllNodesAsList();
+
+            if (searchHistory.Any())
+            {
+                // This logic finds the most frequently searched category.
+                var favoriteCategory = searchHistory
+                    .GroupBy(c => c)
+                    .OrderByDescending(group => group.Count())
+                    .Select(group => group.Key)
+                    .FirstOrDefault();
+
+                if (favoriteCategory != null)
+                {
+                    // Get up to 3 events from that category that aren't already being displayed.
+                    recommendedEvents = GlobalData.EventsByDate.GetAllValues()
+                        .Where(e => e.Category == favoriteCategory && !allEvents.Contains(e))
+                        .Take(3)
+                        .ToList();
+                }
+            }
+
+            // This is the correct place for this code.
+            // I'm packaging everything into the ViewModel to send to the page.
+            var viewModel = new LocalEventsViewModel
+            {
+                DisplayEvents = allEvents,
+                RecommendedEvents = recommendedEvents
+            };
+
+            var categories = GlobalData.UniqueEventCategories.GetAllItems();
+            ViewBag.Categories = new SelectList(categories);
+
+            // The final step is to return the fully prepared ViewModel.
+            return View(viewModel);
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
