@@ -1,11 +1,21 @@
 ﻿using PROG7312_MunicipalServiceApp.Models;
 using System.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace PROG7312_MunicipalServiceApp
 {
     public static class SeedData
     {
         public static void Initialize()
+        {
+            // We'll call both seeding methods when the app starts.
+            SeedEvents();
+            SeedServiceRequests();
+        }
+
+        // This method contains all the Event data from Part 2.
+        private static void SeedEvents()
         {
             // This check prevents adding duplicate data every time the app restarts.
             if (GlobalData.EventsByDate.Count() > 0) return;
@@ -40,6 +50,56 @@ namespace PROG7312_MunicipalServiceApp
                 GlobalData.UniqueEventCategories.Add(ev.Category);
                 GlobalData.FeaturedEvents.Enqueue(ev);
             }
+        }
+
+        // This new method seeds all the data for Part 3.
+        private static void SeedServiceRequests()
+        {
+            // Use the BST to check if data already exists.
+            if (GlobalData.RequestBST.Find(1001) != null) return;
+
+            var requests = new List<ServiceRequest>
+            {
+                new ServiceRequest { Id = 1001, Title = "Burst Water Pipe", Description = "Major leak on Main Rd.", Location = "Sea Point", Status = "In Progress", Urgency = 1, DateSubmitted = DateTime.Now.AddDays(-2), ImageUrl = "/images/water-pipes.jpg" },
+                new ServiceRequest { Id = 1002, Title = "Street Light Out", Description = "Pole 45B is dark.", Location = "Woodstock", Status = "Submitted", Urgency = 5, DateSubmitted = DateTime.Now.AddDays(-5), ImageUrl = "/images/street-light-out.jpg" },
+                new ServiceRequest { Id = 1003, Title = "Pothole Repair", Description = "Deep pothole causing tire damage.", Location = "Claremont", Status = "Submitted", Urgency = 3, DateSubmitted = DateTime.Now.AddDays(-1), ImageUrl = "/images/pothole.jpg" },
+                new ServiceRequest { Id = 1004, Title = "Blocked Storm Drain", Description = "Flooding risk near school.", Location = "Rondebosch", Status = "Assigned", Urgency = 2, DateSubmitted = DateTime.Now.AddDays(-3), ImageUrl = "/images/storm-drain.jpg" },
+                new ServiceRequest { Id = 1005, Title = "Illegal Dumping", Description = "Furniture dumped in park.", Location = "Green Point", Status = "Submitted", Urgency = 4, DateSubmitted = DateTime.Now.AddDays(-4), ImageUrl = "/images/illegal-dumping.jpg" },
+                new ServiceRequest { Id = 1006, Title = "Graffiti Removal", Description = "Tagging on library wall.", Location = "City Bowl", Status = "Resolved", Urgency = 5, DateSubmitted = DateTime.Now.AddDays(-10), ImageUrl = "/images/graffiti.jpg" },
+                new ServiceRequest { Id = 1007, Title = "Traffic Signal Failure", Description = "Intersection lights flashing red.", Location = "Observatory", Status = "In Progress", Urgency = 1, DateSubmitted = DateTime.Now, ImageUrl = "/images/traffic-signal.jpg" },
+                new ServiceRequest { Id = 1008, Title = "Fallen Tree Branch", Description = "Blocking sidewalk.", Location = "Newlands", Status = "Submitted", Urgency = 3, DateSubmitted = DateTime.Now.AddDays(-1), ImageUrl = "/images/fallen-tree.jpg" },
+                new ServiceRequest { Id = 1009, Title = "Water Supply Disruption", Description = "No water in block B.", Location = "Gardens", Status = "In Progress", Urgency = 1, DateSubmitted = DateTime.Now, ImageUrl = "/images/water-pipes.jpg" },
+                new ServiceRequest { Id = 1010, Title = "Damaged Sidewalk", Description = "Cracked paving stones.", Location = "Mowbray", Status = "Submitted", Urgency = 4, DateSubmitted = DateTime.Now.AddDays(-6), ImageUrl = "/images/sidewalk.jpg" },
+                new ServiceRequest { Id = 1011, Title = "Overgrown Verge", Description = "Grass obstructing view.", Location = "Pinelands", Status = "Scheduled", Urgency = 5, DateSubmitted = DateTime.Now.AddDays(-7), ImageUrl = "/images/overgrown-verge.jpg" },
+                new ServiceRequest { Id = 1012, Title = "Leaking Fire Hydrant", Description = "Wasting water.", Location = "Salt River", Status = "Submitted", Urgency = 2, DateSubmitted = DateTime.Now.AddDays(-2), ImageUrl = "/images/fire-hydrant.jpg" },
+                new ServiceRequest { Id = 1013, Title = "Uncollected Refuse", Description = "Bin collection missed.", Location = "Vredehoek", Status = "Resolved", Urgency = 3, DateSubmitted = DateTime.Now.AddDays(-8), ImageUrl = "/images/refuse.jpg" },
+                new ServiceRequest { Id = 1014, Title = "Broken Park Swing", Description = "Chain snapped on swing.", Location = "Tamboerskloof", Status = "Submitted", Urgency = 4, DateSubmitted = DateTime.Now.AddDays(-3), ImageUrl = "/images/park-swing.jpg" },
+                new ServiceRequest { Id = 1015, Title = "Road Sign Damaged", Description = "Stop sign bent over.", Location = "Maitland", Status = "Submitted", Urgency = 2, DateSubmitted = DateTime.Now.AddDays(-5), ImageUrl = "/images/road-sign.jpg" }
+            };
+
+            foreach (var req in requests)
+            {
+                // Add to the Binary Search Tree for finding by ID
+                GlobalData.RequestBST.Add(req);
+
+                // Add to the Min-Heap for organizing by urgency
+                GlobalData.RequestHeap.Add(req);
+
+                // Add to the Graph as a node
+                GlobalData.RequestGraph.AddNode(req);
+            }
+
+            // I'm simulating a few dependencies here to show how the graph works.
+            var r1001 = requests.First(r => r.Id == 1001);
+            var r1003 = requests.First(r => r.Id == 1003);
+            var r1007 = requests.First(r => r.Id == 1007);
+            var r1015 = requests.First(r => r.Id == 1015);
+
+            // Example: Repairing the pothole (1003) can't start until the burst pipe (1001) is fixed.
+            GlobalData.RequestGraph.AddEdge(r1001, r1003);
+
+            // Another dependency: the damaged road sign is related to the traffic signal failure.
+            GlobalData.RequestGraph.AddEdge(r1007, r1015);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace PROG7312_MunicipalServiceApp
             var app = builder.Build();
             SeedData.Initialize();
 
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {

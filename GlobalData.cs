@@ -20,5 +20,14 @@ namespace PROG7312_MunicipalServiceApp
 
         // Tracks user search history to power the recommendation engine.
         public static CustomLinkedList<string> UserSearchHistory { get; } = new CustomLinkedList<string>();
+
+        // Binary Search Tree: Used to efficiently find specific requests by their unique ID.
+        public static CustomBinarySearchTree<ServiceRequest> RequestBST { get; } = new CustomBinarySearchTree<ServiceRequest>();
+
+        // Min-Heap: Used to prioritize requests based on urgency (lowest number = highest priority).
+        public static CustomBinaryHeap<ServiceRequest> RequestHeap { get; } = new CustomBinaryHeap<ServiceRequest>();
+
+        // Graph: Used to model relationships/dependencies between different requests.
+        public static CustomGraph<ServiceRequest> RequestGraph { get; } = new CustomGraph<ServiceRequest>();
     }
 }
