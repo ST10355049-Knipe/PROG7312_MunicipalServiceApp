@@ -150,6 +150,36 @@ namespace PROG7312_MunicipalServiceApp.Controllers
             return Json(eventData);
         }
 
+        [HttpGet]
+        public IActionResult ServiceRequestStatus(string searchId)
+        {
+            var mostUrgent = GlobalData.RequestHeap.Peek();
+            var allRequests = GlobalData.RequestBST.GetAllRequests();
+            ServiceRequest searchedRequest = null;
+
+            // This is where we use our Binary Search Tree's Find method.
+            if (!string.IsNullOrEmpty(searchId))
+                
+           {
+                // Try to convert the string ID from the search box into an integer.
+                if (int.TryParse(searchId, out int id))
+                    
+               {   
+                    // Use the BST's fast Find method
+                    searchedRequest = GlobalData.RequestBST.Find(id);
+                }
+            }
+
+            var viewModel = new ServiceRequestViewModel
+            {
+                MostUrgentRequest = mostUrgent,
+                AllRequests = allRequests,
+                SearchedRequest = searchedRequest, // Pass the found request
+                SearchedId = searchId              // Pass the original search term
+            };
+
+            return View(viewModel);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

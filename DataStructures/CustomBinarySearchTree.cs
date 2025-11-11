@@ -84,5 +84,24 @@ namespace PROG7312_MunicipalServiceApp.DataStructures
             }
         }
 
+        // Public method that starts the traversal.
+        public List<T> GetAllRequests()
+        {
+            var requestList = new List<T>();
+            InOrderTraversal(root, requestList);
+            return requestList;
+        }
+
+        // It visits the left child, then the node itself, then the right child.
+        private void InOrderTraversal(BSTNode<T> node, List<T> requestList)
+        {
+            if (node != null)
+            {
+                InOrderTraversal(node.Left, requestList);
+                requestList.Add(node.Data);
+                InOrderTraversal(node.Right, requestList);
+            }
+        }
+
     }
 }

@@ -1,0 +1,109 @@
+﻿@model ServiceRequestViewModel
+@{
+    ViewData["Title"] = "Service Request Status";
+}
+
+<div class="container py-4">
+    <div class="text-center mb-5">
+        <h1 class="display-5">Service Request Status</h1>
+        <p class="lead text-muted">Track all active and resolved service requests.</p>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Track a Service Request</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="ServiceRequestStatus" method="get">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-10">
+                        <label for="searchId" class="form-label">Enter Request ID (e.g., 1001, 1003)</label>
+                        <input type="text" name="searchId" class="form-control" placeholder="1001" value="@Model.SearchedId">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fa-solid fa-search me-1"></i> Find
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model.MostUrgentRequest != null)
+    {
+        @if (Model.SearchedId != null)
+        {
+            <h3 class="mb-3">Search Result</h3>
+            @if (Model.SearchedRequest != null)
+            {
+                <div class="alert alert-success">
+                    <h4 class="alert-heading">Request Found: @Model.SearchedRequest.Title</h4>
+                    <p>@Model.SearchedRequest.Description</p>
+                    <hr>
+                    <p class="mb-0">
+                        <strong>Status:</strong> @Model.SearchedRequest.Status |
+                        <strong>Location:</strong> @Model.SearchedRequest.Location |
+                        <strong>Urgency:</strong> @Model.SearchedRequest.Urgency
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning">
+                    <h4 class="alert-heading">No request found with ID "@Model.SearchedId".</h4>
+                </div>
+            }
+            <hr class="my-4">
+        }
+
+        <h3 class="mb-3">Highest Priority Request</h3>
+        <div class="alert alert-danger">
+            <h4 class="alert-heading">
+                <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                @Model.MostUrgentRequest.Title (ID: @Model.MostUrgentRequest.Id)
+            </h4>
+            <p>@Model.MostUrgentRequest.Description</p>
+            <hr>
+            <p class="mb-0">
+                <strong>Status:</strong> @Model.MostUrgentRequest.Status |
+                <strong>Location:</strong> @Model.MostUrgentRequest.Location |
+                <strong>Urgency:</strong> @Model.MostUrgentRequest.Urgency
+            </p>
+        </div>
+        <hr class="my-4">
+    }
+
+    <h3 class="mb-3">All Service Requests</h3>
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Location</th>
+                            <th>Urgency</th>
+                            <th>Submitted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var request in Model.AllRequests)
+                        {
+                            <tr>
+                                <td>@request.Id</td>
+                                <td>@request.Title</td>
+                                <td><span class="badge bg-secondary">@request.Status</span></td>
+                                <td>@request.Location</td>
+                                <td>@request.Urgency</td>
+                                <td>@request.DateSubmitted.ToString("dd MMM yyyy")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
