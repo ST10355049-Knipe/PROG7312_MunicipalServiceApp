@@ -190,3 +190,7 @@ a {
     #recommendation-section .alert strong {
         color: var(--bs-primary);
     }
+
+.clickable-row {
+    cursor: pointer;
+}

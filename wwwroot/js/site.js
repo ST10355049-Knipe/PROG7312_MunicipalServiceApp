@@ -36,3 +36,33 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    var requestDetailModal = document.getElementById('requestDetailModal');
+    if (requestDetailModal) {
+        requestDetailModal.addEventListener('show.bs.modal', function (event) {
+            var row = event.relatedTarget;
+            var requestId = row.getAttribute('data-requestid');
+            var url = '/Home/GetServiceRequestById?id=' + requestId;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var modalTitle = requestDetailModal.querySelector('#requestModalTitle');
+                    var modalImage = requestDetailModal.querySelector('#requestModalImage');
+                    var modalDescription = requestDetailModal.querySelector('#requestModalDescription');
+                    var modalDate = requestDetailModal.querySelector('#requestModalDate');
+                    var modalLocation = requestDetailModal.querySelector('#requestModalLocation');
+                    var modalStatus = requestDetailModal.querySelector('#requestModalStatus');
+
+                    modalTitle.textContent = data.title;
+                    modalImage.src = data.imageUrl;
+                    modalDescription.textContent = data.description;
+                    modalDate.textContent = new Date(data.dateSubmitted).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+                    modalLocation.textContent = data.location;
+                    modalStatus.textContent = data.status;
+                })
+                .catch(error => console.error('Error fetching request data:', error));
+        });
+    }
+});

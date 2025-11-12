@@ -188,6 +188,17 @@ namespace PROG7312_MunicipalServiceApp.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
+        public IActionResult GetServiceRequestById(int id)
+        {
+            var requestData = GlobalData.RequestBST.Find(id);
+            if (requestData == null)
+            {
+                return NotFound();
+            }
+            return Json(requestData);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

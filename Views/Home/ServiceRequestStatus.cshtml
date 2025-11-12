@@ -36,14 +36,21 @@
         @if (Model.SearchedRequest != null)
         {
             <div class="alert alert-success">
-                <h4 class="alert-heading">Request Found: @Model.SearchedRequest.Title</h4>
-                <p>@Model.SearchedRequest.Description</p>
-                <hr>
-                <p class="mb-0">
-                    <strong>Status:</strong> @Model.SearchedRequest.Status |
-                    <strong>Location:</strong> @Model.SearchedRequest.Location |
-                    <strong>Urgency:</strong> @Model.SearchedRequest.Urgency
-                </p>
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="@Model.SearchedRequest.ImageUrl" class="img-fluid rounded" alt="@Model.SearchedRequest.Title">
+                    </div>
+                    <div class="col-md-9">
+                        <h4 class="alert-heading">Request Found: @Model.SearchedRequest.Title</h4>
+                        <p>@Model.SearchedRequest.Description</p>
+                        <hr>
+                        <p class="mb-0">
+                            <strong>Status:</strong> @Model.SearchedRequest.Status |
+                            <strong>Location:</strong> @Model.SearchedRequest.Location |
+                            <strong>Urgency:</strong> @Model.SearchedRequest.Urgency
+                        </p>
+                    </div>
+                </div>
             </div>
 
             @if (Model.Dependencies.Any())
@@ -51,10 +58,20 @@
                 <div class="alert alert-warning mt-3">
                     <h5 class="alert-heading">Dependencies</h5>
                     <p>This request cannot be completed until the following requests are resolved:</p>
-                    <ul class="mb-0">
+                    <ul class="list-unstyled mb-0">
                         @foreach (var dep in Model.Dependencies)
                         {
-                            <li><strong>(ID: @dep.Id)</strong> @dep.Title - <em>Status: @dep.Status</em></li>
+                            <li class="mb-3 p-3 border rounded bg-light">
+                                <div class="row g-3">
+                                    <div class="col-md-2">
+                                        <img src="@dep.ImageUrl" class="img-fluid rounded" alt="@dep.Title">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <strong>(ID: @dep.Id)</strong> @dep.Title
+                                        <small class="d-block text-muted"><em>Status: @dep.Status</em></small>
+                                    </div>
+                                </div>
+                            </li>
                         }
                     </ul>
                 </div>
@@ -73,17 +90,24 @@
     {
         <h3 class="mb-3">Highest Priority Request</h3>
         <div class="alert alert-danger">
-            <h4 class="alert-heading">
-                <i class="fa-solid fa-triangle-exclamation me-2"></i>
-                @Model.MostUrgentRequest.Title (ID: @Model.MostUrgentRequest.Id)
-            </h4>
-            <p>@Model.MostUrgentRequest.Description</p>
-            <hr>
-            <p class="mb-0">
-                <strong>Status:</strong> @Model.MostUrgentRequest.Status |
-                <strong>Location:</strong> @Model.MostUrgentRequest.Location |
-                <strong>Urgency:</strong> @Model.MostUrgentRequest.Urgency
-            </p>
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="@Model.MostUrgentRequest.ImageUrl" class="img-fluid rounded" alt="@Model.MostUrgentRequest.Title">
+                </div>
+                <div class="col-md-9">
+                    <h4 class="alert-heading">
+                        <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                        @Model.MostUrgentRequest.Title (ID: @Model.MostUrgentRequest.Id)
+                    </h4>
+                    <p>@Model.MostUrgentRequest.Description</p>
+                    <hr>
+                    <p class="mb-0">
+                        <strong>Status:</strong> @Model.MostUrgentRequest.Status |
+                        <strong>Location:</strong> @Model.MostUrgentRequest.Location |
+                        <strong>Urgency:</strong> @Model.MostUrgentRequest.Urgency
+                    </p>
+                </div>
+            </div>
         </div>
         <hr class="my-4">
     }
@@ -106,7 +130,7 @@
                     <tbody>
                         @foreach (var request in Model.AllRequests)
                         {
-                            <tr>
+                            <tr class="clickable-row" data-bs-toggle="modal" data-bs-target="#requestDetailModal" data-requestid="@request.Id">
                                 <td>@request.Id</td>
                                 <td>@request.Title</td>
                                 <td><span class="badge bg-secondary">@request.Status</span></td>
@@ -117,6 +141,28 @@
                         }
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="requestDetailModal" tabindex="-1" aria-labelledby="requestDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="requestModalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img id="requestModalImage" src="" class="img-fluid rounded mb-3" alt="Service Request Image">
+                <p id="requestModalDescription"></p>
+                <hr />
+                <p class="mb-1"><i class="fa-solid fa-calendar-days me-2"></i><strong>Date:</strong> <span id="requestModalDate"></span></p>
+                <p class="mb-1"><i class="fa-solid fa-location-dot me-2"></i><strong>Location:</strong> <span id="requestModalLocation"></span></p>
+                <p class="mb-0"><i class="fa-solid fa-tag me-2"></i><strong>Category:</strong> <span id="requestModalStatus"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
