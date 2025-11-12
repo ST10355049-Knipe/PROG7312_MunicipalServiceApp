@@ -156,6 +156,7 @@ namespace PROG7312_MunicipalServiceApp.Controllers
             var mostUrgent = GlobalData.RequestHeap.Peek();
             var allRequests = GlobalData.RequestBST.GetAllRequests();
             ServiceRequest searchedRequest = null;
+            var dependencies = new List<ServiceRequest>();
 
             // This is where we use our Binary Search Tree's Find method.
             if (!string.IsNullOrEmpty(searchId))
@@ -163,10 +164,15 @@ namespace PROG7312_MunicipalServiceApp.Controllers
            {
                 // Try to convert the string ID from the search box into an integer.
                 if (int.TryParse(searchId, out int id))
-                    
-               {   
+                {
                     // Use the BST's fast Find method
                     searchedRequest = GlobalData.RequestBST.Find(id);
+
+                    if (searchedRequest != null)
+                    {
+                        // If we found a request, use the graph to find its dependencies.
+                        dependencies = GlobalData.RequestGraph.GetDependencies(searchedRequest);
+                    }
                 }
             }
 
@@ -175,7 +181,8 @@ namespace PROG7312_MunicipalServiceApp.Controllers
                 MostUrgentRequest = mostUrgent,
                 AllRequests = allRequests,
                 SearchedRequest = searchedRequest, // Pass the found request
-                SearchedId = searchId              // Pass the original search term
+                SearchedId = searchId,             // Pass the original search term
+                Dependencies = dependencies
             };
 
             return View(viewModel);

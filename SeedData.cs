@@ -60,7 +60,7 @@ namespace PROG7312_MunicipalServiceApp
 
             var requests = new List<ServiceRequest>
             {
-                new ServiceRequest { Id = 1001, Title = "Burst Water Pipe", Description = "Major leak on Main Rd.", Location = "Sea Point", Status = "In Progress", Urgency = 1, DateSubmitted = DateTime.Now.AddDays(-2), ImageUrl = "/images/water-pipes.jpg" },
+                new ServiceRequest { Id = 1001, Title = "Burst Water Pipe", Description = "Major leak on Main Rd.", Location = "Sea Point", Status = "In Progress", Urgency = 1, DateSubmitted = DateTime.Now.AddDays(-2), ImageUrl = "/images/water-pipes-burst.jpg" },
                 new ServiceRequest { Id = 1002, Title = "Street Light Out", Description = "Pole 45B is dark.", Location = "Woodstock", Status = "Submitted", Urgency = 5, DateSubmitted = DateTime.Now.AddDays(-5), ImageUrl = "/images/street-light-out.jpg" },
                 new ServiceRequest { Id = 1003, Title = "Pothole Repair", Description = "Deep pothole causing tire damage.", Location = "Claremont", Status = "Submitted", Urgency = 3, DateSubmitted = DateTime.Now.AddDays(-1), ImageUrl = "/images/pothole.jpg" },
                 new ServiceRequest { Id = 1004, Title = "Blocked Storm Drain", Description = "Flooding risk near school.", Location = "Rondebosch", Status = "Assigned", Urgency = 2, DateSubmitted = DateTime.Now.AddDays(-3), ImageUrl = "/images/storm-drain.jpg" },
@@ -96,10 +96,10 @@ namespace PROG7312_MunicipalServiceApp
             var r1015 = requests.First(r => r.Id == 1015);
 
             // Example: Repairing the pothole (1003) can't start until the burst pipe (1001) is fixed.
-            GlobalData.RequestGraph.AddEdge(r1001, r1003);
+            GlobalData.RequestGraph.AddEdge(r1003, r1001);
 
             // Another dependency: the damaged road sign is related to the traffic signal failure.
-            GlobalData.RequestGraph.AddEdge(r1007, r1015);
+            GlobalData.RequestGraph.AddEdge(r1015, r1007);
         }
     }
 }

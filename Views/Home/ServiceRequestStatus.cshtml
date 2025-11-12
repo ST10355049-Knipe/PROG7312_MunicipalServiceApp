@@ -30,33 +30,47 @@
         </div>
     </div>
 
+    @if (Model.SearchedId != null)
+    {
+        <h3 class="mb-3">Search Result</h3>
+        @if (Model.SearchedRequest != null)
+        {
+            <div class="alert alert-success">
+                <h4 class="alert-heading">Request Found: @Model.SearchedRequest.Title</h4>
+                <p>@Model.SearchedRequest.Description</p>
+                <hr>
+                <p class="mb-0">
+                    <strong>Status:</strong> @Model.SearchedRequest.Status |
+                    <strong>Location:</strong> @Model.SearchedRequest.Location |
+                    <strong>Urgency:</strong> @Model.SearchedRequest.Urgency
+                </p>
+            </div>
+
+            @if (Model.Dependencies.Any())
+            {
+                <div class="alert alert-warning mt-3">
+                    <h5 class="alert-heading">Dependencies</h5>
+                    <p>This request cannot be completed until the following requests are resolved:</p>
+                    <ul class="mb-0">
+                        @foreach (var dep in Model.Dependencies)
+                        {
+                            <li><strong>(ID: @dep.Id)</strong> @dep.Title - <em>Status: @dep.Status</em></li>
+                        }
+                    </ul>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="alert alert-warning">
+                <h4 class="alert-heading">No request found with ID "@Model.SearchedId".</h4>
+            </div>
+        }
+        <hr class="my-4">
+    }
+
     @if (Model.MostUrgentRequest != null)
     {
-        @if (Model.SearchedId != null)
-        {
-            <h3 class="mb-3">Search Result</h3>
-            @if (Model.SearchedRequest != null)
-            {
-                <div class="alert alert-success">
-                    <h4 class="alert-heading">Request Found: @Model.SearchedRequest.Title</h4>
-                    <p>@Model.SearchedRequest.Description</p>
-                    <hr>
-                    <p class="mb-0">
-                        <strong>Status:</strong> @Model.SearchedRequest.Status |
-                        <strong>Location:</strong> @Model.SearchedRequest.Location |
-                        <strong>Urgency:</strong> @Model.SearchedRequest.Urgency
-                    </p>
-                </div>
-            }
-            else
-            {
-                <div class="alert alert-warning">
-                    <h4 class="alert-heading">No request found with ID "@Model.SearchedId".</h4>
-                </div>
-            }
-            <hr class="my-4">
-        }
-
         <h3 class="mb-3">Highest Priority Request</h3>
         <div class="alert alert-danger">
             <h4 class="alert-heading">

@@ -14,5 +14,7 @@ namespace PROG7312_MunicipalServiceApp.Models
         public string SearchedId { get; set; } // Keeps the search box filled
 
         public ServiceRequest SearchedRequest { get; set; } // Holds the found request
+
+        public List<ServiceRequest> Dependencies { get; set; } // Holds the dependencies
     }
 }

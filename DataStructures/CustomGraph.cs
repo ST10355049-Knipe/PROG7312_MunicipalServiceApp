@@ -42,5 +42,25 @@ namespace PROG7312_MunicipalServiceApp.DataStructures
             // Add the 'to' node to the 'from' node's neighbor list.
             fromNode.AddNeighbor(toNode);
         }
+
+        // Finds all the direct neighbors (dependencies) for a given node.
+        public List<T> GetDependencies(T data)
+        {
+            var dependencies = new List<T>();
+            GraphNode<T> node;
+
+            // First, find the node in our hash table.
+            if (nodes.TryGetValue(data, out node))
+            {
+                // If we find it, go through its neighbors list.
+                var currentNeighbor = node.Neighbors.head;
+                while (currentNeighbor != null)
+                {
+                    dependencies.Add(currentNeighbor.Data.Data);
+                    currentNeighbor = currentNeighbor.Next;
+                }
+            }
+            return dependencies;
+        }
     }
 }
